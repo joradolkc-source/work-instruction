@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WI — Pasteurizer 1-2 | CHABAA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-950:#0a1628; --blue-900:#0f2242; --blue-800:#1a3a6b; --blue-700:#1e4d96;
+  --blue-600:#2563b8; --blue-500:#2d74d4; --blue-400:#4a90e2; --blue-300:#7ab3ed;
+  --blue-200:#b8d4f5; --blue-100:#deeafa; --blue-50:#f0f6fd;
+  --gray-950:#0f1114; --gray-900:#181b20; --gray-800:#252930; --gray-700:#343a44;
+  --gray-600:#4b5563; --gray-500:#6b7280; --gray-400:#9ca3af; --gray-300:#d1d5db;
+  --gray-200:#e5e7eb; --gray-100:#f3f4f6; --gray-50:#f9fafb; --white:#ffffff;
+  --bg:var(--gray-950); --surface:var(--gray-900); --surface2:var(--gray-800);
+  --border:var(--gray-700); --text:var(--gray-50); --text-muted:var(--gray-400); --text-dim:var(--gray-600);
+  --accent:var(--blue-500); --accent-glow:rgba(45,116,212,0.22);
+  --radius:8px; --radius-lg:14px;
+  --shadow:0 4px 20px rgba(0,0,0,0.55);
+  --shadow-bl:0 0 0 1px var(--blue-700),0 6px 24px rgba(37,99,184,0.22);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"IBM Plex Sans Thai",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.6;}
+
+/* HEADER */
+header{background:linear-gradient(180deg,var(--blue-900) 0%,var(--blue-950) 100%);border-bottom:1px solid var(--blue-800);position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,0.45);}
+.header-inner{max-width:1140px;margin:0 auto;display:flex;align-items:center;gap:14px;height:64px;padding:0 20px;}
+.hdr-logo{height:38px;width:38px;border-radius:50%;object-fit:cover;flex-shrink:0;box-shadow:0 0 0 2px var(--blue-600),0 2px 10px rgba(37,99,184,0.4);}
+.hdr-divider{width:1px;height:26px;background:var(--blue-800);flex-shrink:0;}
+.hdr-info{flex:1;min-width:0;}
+.hdr-label{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue-300);margin-bottom:1px;}
+.hdr-title{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--white);}
+.hdr-badge{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:1px;background:var(--blue-700);color:var(--blue-100);padding:4px 10px;border-radius:5px;white-space:nowrap;flex-shrink:0;border:1px solid var(--blue-500);}
+.hdr-meta{font-size:11px;color:var(--blue-400);white-space:nowrap;flex-shrink:0;}
+.top-bar{height:3px;background:var(--blue-900);}
+.top-bar-fill{height:100%;background:linear-gradient(90deg,var(--blue-600),var(--blue-300));width:0%;transition:width 0.4s ease;}
+
+/* LAYOUT */
+.container{max-width:1140px;margin:0 auto;padding:32px 20px 80px;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--blue-950) 0%,#111827 55%,#0d1f3c 100%);border:1px solid var(--blue-800);border-radius:var(--radius-lg);padding:32px;margin-bottom:26px;position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;top:-50px;right:-50px;width:260px;height:260px;background:radial-gradient(circle,rgba(37,99,184,0.16) 0%,transparent 65%);border-radius:50%;pointer-events:none;}
+.hero-top{display:flex;align-items:flex-start;gap:18px;margin-bottom:20px;}
+.hero-logo-ring{flex-shrink:0;width:64px;height:64px;border-radius:50%;padding:3px;background:linear-gradient(135deg,var(--blue-400),var(--blue-700));box-shadow:0 4px 20px rgba(37,99,184,0.4);}
+.hero-logo-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;}
+.hero-text{flex:1;min-width:0;}
+.hero-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--blue-400);margin-bottom:7px;display:flex;align-items:center;gap:8px;}
+.hero-eyebrow::before{content:"";display:block;width:20px;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--blue-400),var(--blue-600));}
+.hero h1{font-size:clamp(17px,3.2vw,25px);font-weight:700;line-height:1.35;color:var(--white);margin-bottom:8px;}
+.hero-desc{font-size:13px;color:var(--gray-400);line-height:1.75;max-width:600px;}
+.hero-stats{display:flex;gap:0;flex-wrap:wrap;background:rgba(10,22,40,0.6);border:1px solid var(--blue-800);border-radius:var(--radius);overflow:hidden;margin-top:18px;}
+.hero-stat{flex:1;min-width:72px;padding:13px 16px;border-right:1px solid var(--blue-800);text-align:center;}
+.hero-stat:last-child{border-right:none;}
+.hero-stat-val{font-family:"IBM Plex Mono",monospace;font-size:21px;font-weight:600;color:var(--blue-300);display:block;}
+.hero-stat-lbl{font-size:11px;color:var(--gray-500);margin-top:1px;display:block;}
+
+/* PROGRESS */
+.progress-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 22px;margin-bottom:26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.ring-wrap{position:relative;width:58px;height:58px;flex-shrink:0;}
+.ring-wrap svg{transform:rotate(-90deg);}
+.ring-bg{fill:none;stroke:var(--gray-700);stroke-width:5;}
+.ring-fill{fill:none;stroke:url(#rg);stroke-width:5;stroke-linecap:round;stroke-dasharray:163;stroke-dashoffset:163;transition:stroke-dashoffset 0.5s ease;}
+.ring-txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--blue-200);}
+.prog-info h3{font-size:14px;font-weight:600;color:var(--white);margin-bottom:3px;}
+.prog-info p{font-size:12px;color:var(--text-muted);}
+.reset-btn{margin-left:auto;background:none;border:1px solid var(--border);color:var(--text-muted);padding:7px 16px;border-radius:var(--radius);cursor:pointer;font-size:12px;font-family:inherit;transition:all .2s;display:flex;align-items:center;gap:6px;}
+.reset-btn:hover{background:var(--surface2);color:var(--white);border-color:var(--blue-600);}
+
+/* SECTION LABEL */
+.sec-label{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);font-family:"IBM Plex Mono",monospace;margin-bottom:12px;padding-left:2px;display:flex;align-items:center;gap:10px;}
+.sec-label::after{content:"";flex:1;height:1px;background:var(--border);}
+
+/* STEP CARDS */
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:26px;}
+.step-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 18px 16px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;user-select:none;}
+.step-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--cc,var(--blue-600));border-radius:var(--radius-lg) var(--radius-lg) 0 0;}
+.step-card::after{content:"";position:absolute;inset:0;border-radius:var(--radius-lg);border:1px solid transparent;transition:border-color .2s;pointer-events:none;}
+.step-card:hover{background:var(--surface2);box-shadow:var(--shadow-bl);transform:translateY(-2px);}
+.step-card:hover::after{border-color:var(--blue-600);}
+.step-card.open{background:var(--surface2);}
+.step-card.open::after{border-color:var(--blue-500);}
+.step-card .snum{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:1px;color:var(--blue-400);margin-bottom:7px;display:block;}
+.step-card .stitle{font-size:13px;font-weight:600;line-height:1.5;color:var(--white);margin-bottom:14px;}
+.step-foot{display:flex;align-items:center;justify-content:space-between;}
+.step-cnt{font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:5px;}
+.step-dot{width:5px;height:5px;border-radius:50%;background:var(--cc,var(--blue-500));}
+.step-arr{width:24px;height:24px;border-radius:6px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:14px;transition:all .2s;flex-shrink:0;}
+.step-card:hover .step-arr{background:rgba(37,99,184,0.2);border-color:var(--blue-600);color:var(--blue-200);}
+.step-card.open .step-arr{background:var(--blue-700);border-color:var(--blue-500);color:var(--white);transform:rotate(90deg);}
+
+/* DETAIL PANEL */
+.det-panel{display:none;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:18px;animation:sd .22s ease;}
+.det-panel.visible{display:block;}
+@keyframes sd{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.pan-hdr{padding:16px 22px;border-bottom:1px solid var(--border);background:linear-gradient(90deg,var(--blue-950) 0%,var(--surface2) 100%);display:flex;align-items:center;gap:12px;}
+.pan-bar{width:3px;height:26px;border-radius:2px;flex-shrink:0;background:var(--cc,var(--blue-500));}
+.pan-info h2{font-size:14px;font-weight:600;color:var(--white);}
+.pan-info p{font-size:11px;color:var(--text-muted);margin-top:2px;}
+.pan-close{margin-left:auto;background:none;border:1px solid var(--border);color:var(--text-muted);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+.pan-close:hover{background:var(--gray-700);color:var(--white);}
+
+/* SUB STEPS */
+.sub-steps{padding:12px 18px;}
+.sub-step{display:flex;gap:12px;padding:12px 14px;border-radius:var(--radius);margin-bottom:5px;border:1px solid transparent;cursor:pointer;transition:all .15s;align-items:flex-start;}
+.sub-step:hover{background:var(--surface2);border-color:var(--border);}
+.sub-step.checked{background:rgba(37,99,184,0.08);border-color:rgba(37,99,184,0.24);}
+.sub-cb{width:20px;height:20px;border-radius:5px;border:1.5px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:all .15s;}
+.sub-step.checked .sub-cb{background:var(--blue-600);border-color:var(--blue-500);}
+.chk{color:#fff;font-size:11px;display:none;}
+.sub-step.checked .chk{display:block;}
+.sub-num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:var(--text-dim);white-space:nowrap;margin-top:3px;width:34px;flex-shrink:0;}
+.sub-body{flex:1;min-width:0;}
+.sub-txt{font-size:14px;line-height:1.65;color:var(--text);}
+.sub-step.checked .sub-txt{color:var(--text-muted);text-decoration:line-through;}
+
+/* TAGS */
+.tag{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;vertical-align:middle;margin-left:6px;letter-spacing:.4px;}
+.tag-time{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.3);}
+.tag-qc{background:rgba(74,144,226,.14);color:var(--blue-300);border:1px solid rgba(74,144,226,.3);}
+.tag-auto{background:rgba(52,211,153,.12);color:#34d399;border:1px solid rgba(52,211,153,.28);}
+.tag-warn{background:rgba(248,113,113,.12);color:#f87171;border:1px solid rgba(248,113,113,.3);}
+
+/* IMG TOGGLE */
+.img-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:11px;font-weight:500;color:var(--blue-300);background:rgba(37,99,184,.1);border:1px solid rgba(37,99,184,.25);border-radius:5px;padding:3px 10px;cursor:pointer;transition:all .15s;user-select:none;}
+.img-btn:hover{background:rgba(37,99,184,.18);}
+.img-btn.open{background:rgba(37,99,184,.2);border-color:rgba(74,144,226,.5);color:var(--blue-200);}
+.img-slot{display:none;margin-top:10px;}
+.img-slot.open{display:block;}
+.img-wrap{position:relative;display:inline-block;cursor:zoom-in;border-radius:var(--radius);overflow:hidden;max-width:100%;border:1px solid var(--border);}
+.img-wrap img{display:block;max-width:100%;max-height:280px;object-fit:contain;background:var(--gray-900);}
+.img-hint{position:absolute;bottom:6px;right:6px;background:rgba(10,22,40,.85);color:var(--blue-200);font-size:10px;padding:2px 7px;border-radius:4px;backdrop-filter:blur(4px);pointer-events:none;border:1px solid var(--blue-800);}
+
+/* LIGHTBOX */
+.lb{display:none;position:fixed;inset:0;background:rgba(5,10,20,.94);z-index:999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px);}
+.lb.open{display:flex;}
+.lb-c{position:relative;max-width:94vw;max-height:94vh;animation:zi .2s ease;}
+@keyframes zi{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+.lb-img{max-width:94vw;max-height:88vh;border-radius:var(--radius-lg);display:block;box-shadow:0 20px 80px rgba(0,0,0,.8),0 0 0 1px var(--blue-800);object-fit:contain;}
+.lb-bar{position:absolute;top:-44px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;}
+.lb-cap{font-size:12px;color:var(--blue-300);font-family:"IBM Plex Mono",monospace;}
+.lb-x{background:rgba(37,99,184,.25);border:1px solid var(--blue-700);color:var(--blue-200);font-size:16px;width:32px;height:32px;border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.lb-x:hover{background:var(--blue-700);color:var(--white);}
+
+/* FOOTER */
+footer{background:var(--blue-950);border-top:1px solid var(--blue-900);padding:16px 20px;}
+.ft-inner{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+.ft-logo{height:22px;width:22px;border-radius:50%;object-fit:cover;opacity:.75;}
+.ft-txt{font-size:11px;color:var(--blue-500);font-family:"IBM Plex Mono",monospace;letter-spacing:.5px;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hdr-meta,.hdr-badge{display:none;}
+  .hero{padding:22px 18px;}
+  .hero-logo-ring{width:52px;height:52px;}
+  .steps-grid{grid-template-columns:1fr;}
+  .sub-steps{padding:10px 12px;}
+  .pan-hdr{padding:12px 16px;}
+  .progress-section{gap:14px;}
+  .reset-btn{margin-left:0;width:100%;justify-content:center;}
+  .container{padding:18px 12px 60px;}
+  .img-wrap img{max-height:200px;}
+}
+@media(min-width:1024px){.steps-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ANIM */
+.fi{animation:fi .4s ease both;}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}.d4{animation-delay:.24s}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img class="hdr-logo" id="hdrLogo" src="" alt="CHABAA">
+    <div class="hdr-divider"></div>
+    <div class="hdr-info">
+      <div class="hdr-label">Work Instruction</div>
+      <div class="hdr-title">ขั้นตอนการใช้งาน Pasteurizer 1-2</div>
+    </div>
+    <span class="hdr-badge">WI-PAST-001</span>
+    <span class="hdr-meta">Rev.1 · 22/04/2569</span>
+  </div>
+  <div class="top-bar"><div class="top-bar-fill" id="topBar"></div></div>
+</header>
+
+<div class="lb" id="lb" onclick="closeLB()">
+  <div class="lb-c" onclick="event.stopPropagation()">
+    <div class="lb-bar">
+      <span class="lb-cap" id="lbCap"></span>
+      <button class="lb-x" onclick="closeLB()">✕</button>
+    </div>
+    <img class="lb-img" id="lbImg" src="" alt="">
+  </div>
+</div>
+
+<main class="container">
+  <div class="hero fi">
+    <div class="hero-top">
+      <div class="hero-logo-ring"><img id="heroLogo" src="" alt="CHABAA"></div>
+      <div class="hero-text">
+        <div class="hero-eyebrow">CHABAA · Work Instruction · Production</div>
+        <h1>ขั้นตอนการใช้งานเครื่อง Pasteurizer 1-2<br>และระบบ Sterile / Product Transfer</h1>
+        <p class="hero-desc">คู่มือปฏิบัติงานสำหรับพนักงานผลิต — ครอบคลุมการ Sterile เครื่อง, การส่งผลิตภัณฑ์เข้าระบบ, การรับน้ำผลิตภัณฑ์หม้อ Sac และการควบคุมระหว่างผลิต</p>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-val">4</span><span class="hero-stat-lbl">หัวข้อหลัก</span></div>
+      <div class="hero-stat"><span class="hero-stat-val">33</span><span class="hero-stat-lbl">ขั้นตอนย่อย</span></div>
+      <div class="hero-stat"><span class="hero-stat-val">27</span><span class="hero-stat-lbl">รูปภาพประกอบ</span></div>
+      <div class="hero-stat"><span class="hero-stat-val">115+</span><span class="hero-stat-lbl">นาที Sterile</span></div>
+    </div>
+  </div>
+
+  <div class="progress-section fi d1">
+    <div class="ring-wrap">
+      <svg viewBox="0 0 56 56" width="58" height="58">
+        <defs>
+          <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#2563b8"/>
+            <stop offset="100%" stop-color="#7ab3ed"/>
+          </linearGradient>
+        </defs>
+        <circle class="ring-bg" cx="28" cy="28" r="26"/>
+        <circle class="ring-fill" id="ringFill" cx="28" cy="28" r="26"/>
+      </svg>
+      <div class="ring-txt" id="ringTxt">0%</div>
+    </div>
+    <div class="prog-info">
+      <h3>ความคืบหน้าการทำงาน</h3>
+      <p id="progDesc">ยังไม่ได้เริ่มขั้นตอน — แตะหัวข้อด้านล่างเพื่อเริ่ม</p>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">↺ รีเซ็ต</button>
+  </div>
+
+  <div class="sec-label">หัวข้อหลัก — แตะเพื่อดูขั้นตอนย่อย</div>
+  <div class="steps-grid" id="stepsGrid"></div>
+  <div id="panels"></div>
+</main>
+
+<footer>
+  <div class="ft-inner">
+    <img class="ft-logo" id="ftLogo" src="" alt="CHABAA">
+    <span class="ft-txt">WI-PAST-001 · Rev.1 · 22/04/2026 · CHABAA · ห้ามแก้ไขโดยไม่ได้รับอนุญาต</span>
+  </div>
+</footer>
+
+<script>
+const LOGO_B64 = "images/logo.png";
+const STEP_IMAGES = {
+  "1.1": "images/step_1_1.jpg",
+  "1.10": "images/step_1_10.jpg",
+  "1.11": "images/step_1_11.jpg",
+  "1.12": "images/step_1_12.jpg",
+  "1.13": "images/step_1_13.jpg",
+  "1.14": "images/step_1_14.jpg",
+  "1.15": "images/step_1_15.jpg",
+  "1.16": "images/step_1_16.jpg",
+  "1.17": "images/step_1_17.jpg",
+  "1.2": "images/step_1_2.jpg",
+  "1.3": "images/step_1_3.jpg",
+  "1.4": "images/step_1_4.jpg",
+  "1.5": "images/step_1_5.jpg",
+  "1.6": "images/step_1_6.jpg",
+  "1.7": "images/step_1_7.jpg",
+  "1.8": "images/step_1_8.jpg",
+  "1.9": "images/step_1_9.jpg",
+  "2.1": "images/step_2_1.jpg",
+  "2.2": "images/step_2_2.jpg",
+  "2.3": "images/step_2_3.jpg",
+  "2.4": "images/step_2_4.jpg",
+  "2.6": "images/step_2_6.jpg",
+  "2.7": "images/step_2_7.jpg",
+  "2.8": "images/step_2_8.jpg",
+  "2.9": "images/step_2_9.jpg",
+  "3.1": "images/step_3_1.jpg",
+  "4.1": "images/step_4_1.jpg"
+};
+
+// Inject logos
+document.getElementById("hdrLogo").src = LOGO_B64;
+document.getElementById("heroLogo").src = LOGO_B64;
+document.getElementById("ftLogo").src = LOGO_B64;
+
+const STEPS = [
+  {id:1,color:"#2563b8",
+   title:"การ Sterile Pas 1-2 และส่งน้ำร้อน\nให้หม้อ Sac + S2 ก่อนเดินงาน",
+   subs:[
+    {num:"1.1",  text:'เปิดเบรคเกอร์ที่ตำแหน่ง "เปิด"'},
+    {num:"1.2",  text:"หมุนเปิดสตีมวาล์วประมาณ 3 รอบ"},
+    {num:"1.3",  text:"เปิดวาล์วลม"},
+    {num:"1.4",  text:"เปิดตู้ควบคุม ยกเบรคเกอร์ตำแหน่งขวาบนของตู้ขึ้นทั้ง 2 ตัว"},
+    {num:"1.5",  text:"หมุน Inverter เพื่อตั้ง Flow ที่ 40 Hz",tag:"auto",tagText:"40 Hz"},
+    {num:"1.6",  text:"กดปุ่ม Run ที่หน้าจอ 1 ครั้ง"},
+    {num:"1.7",  text:"หน้าจอบนขวาแสดงข้อความ ให้กด Run อีก 1 ครั้ง"},
+    {num:"1.8",  text:"กดปุ่ม Pasteurizer 12000L-15000L No.1 และกด Manual"},
+    {num:"1.9",  text:'กดปุ่ม "PID Function" และกด "Auto Tuning" ด้านล่างขวาของจอ เพื่อปรับตั้งวาล์วสตีมอัตโนมัติ',tag:"auto",tagText:"Auto Tuning"},
+    {num:"1.10", text:"ทำซ้ำข้อ 1.9 อีกครั้ง"},
+    {num:"1.11", text:'กดปุ่ม "Exit" และกด "ตกลง" ด้านล่างขวาของจอ เพื่อออกจากหน้าจอนี้'},
+    {num:"1.12", text:'บิดสวิตด้านซ้ายตู้ควบคุมไปตำแหน่ง "Auto"'},
+    {num:"1.13", text:"กดปุ่ม Pasteurizer 12000L-15000L No.1 และกด Auto"},
+    {num:"1.14", text:'กดปุ่ม "Sterile" ใต้หน้าจอ ไฟสีขาวจะกระพริบถี่'},
+    {num:"1.15", text:"เข้าสเตป Sterile โดยมีฟรัชเดรน 15 นาที และเวียนน้ำร้อน 100 นาที จับเวลาเมื่ออุณหภูมิได้ตามมาตรฐาน เมื่ออุณหภูมิได้ตามมาตรฐานแจ้งพนง.หม้อ Sac หรือพนง. S2 เปิดใช้น้ำร้อนได้",tag:"time",tagText:"15+100 นาที"},
+    {num:"1.16", text:"หลังจบสเตปไฟขาวติดค้าง ไฟเขียวจะกระพริบ พร้อมส่งผลิตภัณฑ์เข้าระบบ"},
+    {num:"1.17", text:"ในกรณีต้องการหยุดเครื่อง ให้กดปุ่มสีแดง",tag:"warn",tagText:"หยุดฉุกเฉิน"},
+  ]},
+  {id:2,color:"#1e7bb8",
+   title:"ขั้นตอนการส่งน้ำผลิตภัณฑ์\nเข้าเครื่อง Pasteurizer 1-2",
+   subs:[
+    {num:"2.1",  text:"ต่อท่อสวิงเบนใต้ถังพัก หมุนให้แน่น"},
+    {num:"2.2",  text:"บิดสวิต feed pump to past2 ไปตำแหน่งเปิด"},
+    {num:"2.3",  text:"เปิดวาล์วเดรนข้างถัง BT ประมาณ 5 วินาที และปิดปั้ม",tag:"time",tagText:"5 วินาที"},
+    {num:"2.4",  text:"เปิดตู้ควบคุม หมุน Inverter เพื่อตั้ง Flow ที่ 30 Hz",tag:"auto",tagText:"30 Hz"},
+    {num:"2.5",  text:"ตรวจเช็คค่าอุณหภูมิและ Flow ที่หน้าจอให้ได้มาตรฐาน"},
+    {num:"2.6",  text:"กดปุ่ม Product ไฟเขียวกระพริบถี่ขึ้น ระบบจะเปิดเดรนน้ำ BT ออกอัตโนมัติที่ท่อเดรน BT",tag:"auto",tagText:"Auto Drain"},
+    {num:"2.7",  text:"ไฟเขียวสวิต Prod feed valve ติด เริ่มจับเวลาเดรน 5 นาที",tag:"time",tagText:"5 นาที"},
+    {num:"2.8",  text:"ครบ 5 นาที เก็บน้ำปลายท่อ"},
+    {num:"2.9",  text:'กดปุ่ม "Ready" ใต้หน้าจอ ไฟสีเหลืองติด'},
+    {num:"2.10", text:"ส่งตัวอย่างให้ QC วัดค่าเคมี",tag:"qc",tagText:"QC"},
+    {num:"2.11", text:"แจ้งห้อง Sac"},
+  ]},
+  {id:3,color:"#4a8fc2",
+   title:"ขั้นตอนการรับน้ำผลิตภัณฑ์\nหม้อ Sac",
+   subs:[
+    {num:"3.1",  text:'บิดสวิตไปที่ปุ่ม "On" ตู้ควบคุมหม้อ Sac'},
+    {num:"3.2",  text:"ปิดวาล์วเดรนท้ายไลน์หม้อต้ม"},
+    {num:"3.3",  text:"เปิดวาล์วเติมน้ำผลิตภัณฑ์ลงหม้อสุดท้าย ครึ่งหม้อ"},
+    {num:"3.4",  text:"เปิดวาล์วใต้หม้อ Sac และเปิดปั้มส่งน้ำผลิตภัณฑ์ไล่ท่อไป S2 ใช้น้ำไล่ประมาณ 1 หม้อ Sac"},
+    {num:"3.5",  text:"ครบจำนวนให้ปิดวาล์วใต้ถัง ปิดปั้ม หยุดส่ง"},
+    {num:"3.6",  text:"เตรียมน้ำผลิตภัณฑ์และ Sac สำหรับส่ง S2 บรรจุตามมาตรฐาน"},
+    {num:"3.7",  text:"ประสานงานความพร้อม S2 ก่อนส่ง Sac ไป Filler"},
+    {num:"3.8",  text:"เปิดตู้ควบคุมปรับ Invertor ให้ได้ Hz ตามมาตรฐาน",tag:"auto",tagText:"ตั้ง Hz"},
+  ]},
+  {id:4,color:"#3a9abd",
+   title:"ขั้นตอนการควบคุมเครื่อง\nระหว่างผลิต",
+   subs:[
+    {num:"4.1",text:"จดบันทึกค่าควบคุมจากหน้าจอและตัวเครื่องลงในฟอร์มบันทึกข้อมูลทุกๆ 30 นาที",tag:"time",tagText:"ทุก 30 นาที"},
+  ]},
+];
+
+const TOTAL=STEPS.reduce((s,st)=>s+st.subs.length,0);
+const checked={};
+let openPanel=null;
+
+function tagHTML(sub){
+  if(!sub.tag) return "";
+  return `<span class="tag tag-${sub.tag}">${sub.tagText}</span>`;
+}
+
+function renderAll(){
+  const grid=document.getElementById("stepsGrid");
+  const panels=document.getElementById("panels");
+  grid.innerHTML=panels.innerHTML="";
+  STEPS.forEach((step,si)=>{
+    const card=document.createElement("div");
+    card.className=`step-card fi d${si+1}`;
+    card.id=`card-${step.id}`;
+    card.style.setProperty("--cc",step.color);
+    card.innerHTML=`
+      <span class="snum">STEP ${String(step.id).padStart(2,"0")}</span>
+      <div class="stitle">${step.title.replace("\n","<br>")}</div>
+      <div class="step-foot">
+        <div class="step-cnt"><span class="step-dot"></span>${step.subs.length} ขั้นตอนย่อย</div>
+        <div class="step-arr">›</div>
+      </div>`;
+    card.addEventListener("click",()=>togglePanel(step.id));
+    grid.appendChild(card);
+
+    const panel=document.createElement("div");
+    panel.className="det-panel";
+    panel.id=`panel-${step.id}`;
+    panel.style.setProperty("--cc",step.color);
+    panel.innerHTML=`
+      <div class="pan-hdr">
+        <div class="pan-bar"></div>
+        <div class="pan-info"><h2>Step ${step.id} — ${step.title.replace("\n"," ")}</h2><p>${step.subs.length} ขั้นตอนย่อย</p></div>
+        <button class="pan-close" onclick="togglePanel(${step.id})">✕</button>
+      </div>
+      <div class="sub-steps" id="subs-${step.id}"></div>`;
+    panels.appendChild(panel);
+    renderSubs(step);
+  });
+}
+
+function renderSubs(step){
+  const c=document.getElementById(`subs-${step.id}`);
+  c.innerHTML="";
+  step.subs.forEach(sub=>{
+    const k=sub.num;
+    const isC=!!checked[k];
+    const hasImg=!!STEP_IMAGES[k];
+    const sk=k.replace(".","_");
+    const div=document.createElement("div");
+    div.className=`sub-step${isC?" checked":""}`;
+    div.id=`sub-${sk}`;
+    div.innerHTML=`
+      <div class="sub-cb" onclick="toggleCheck('${k}',event)"><span class="chk">✓</span></div>
+      <span class="sub-num">${sub.num}</span>
+      <div class="sub-body">
+        <div class="sub-txt">${sub.text}${tagHTML(sub)}</div>
+        ${hasImg?`
+          <div class="img-btn" id="btn-${sk}" onclick="toggleImg('${k}',event)">📷 <span>ดูรูปภาพ</span></div>
+          <div class="img-slot" id="slot-${sk}">
+            <div class="img-wrap" onclick="openLB('${k}')">
+              <img src="${STEP_IMAGES[k]}" alt="ขั้นตอน ${k}" loading="lazy">
+              <span class="img-hint">🔍 ขยายภาพ</span>
+            </div>
+          </div>`:""}
+      </div>`;
+    div.querySelector(".sub-body").addEventListener("click",e=>{
+      if(e.target.closest(".img-btn")||e.target.closest(".img-slot")) return;
+      toggleCheck(k,{stopPropagation:()=>{}});
+    });
+    c.appendChild(div);
+  });
+}
+
+function togglePanel(id){
+  const panel=document.getElementById(`panel-${id}`);
+  const card=document.getElementById(`card-${id}`);
+  if(openPanel&&openPanel!==id){
+    document.getElementById(`panel-${openPanel}`).classList.remove("visible");
+    document.getElementById(`card-${openPanel}`).classList.remove("open");
+  }
+  const isOpen=panel.classList.contains("visible");
+  panel.classList.toggle("visible",!isOpen);
+  card.classList.toggle("open",!isOpen);
+  openPanel=!isOpen?id:null;
+  if(!isOpen) setTimeout(()=>panel.scrollIntoView({behavior:"smooth",block:"nearest"}),50);
+}
+
+function toggleImg(key,e){
+  e.stopPropagation();
+  const slot=document.getElementById(`slot-${key.replace(".","_")}`);
+  const btn=document.getElementById(`btn-${key.replace(".","_")}`);
+  const open=slot.classList.toggle("open");
+  btn.classList.toggle("open",open);
+  btn.querySelector("span").textContent=open?"ซ่อนรูปภาพ":"ดูรูปภาพ";
+}
+
+function toggleCheck(key,e){
+  e.stopPropagation&&e.stopPropagation();
+  checked[key]=!checked[key];
+  document.getElementById(`sub-${key.replace(".","_")}`).classList.toggle("checked",checked[key]);
+  updateProgress();saveState();
+}
+
+function updateProgress(){
+  const done=Object.values(checked).filter(Boolean).length;
+  const pct=Math.round(done/TOTAL*100);
+  document.getElementById("ringTxt").textContent=pct+"%";
+  document.getElementById("ringFill").style.strokeDashoffset=163-(pct/100)*163;
+  document.getElementById("topBar").style.width=pct+"%";
+  document.getElementById("progDesc").textContent=
+    done===0?"ยังไม่ได้เริ่มขั้นตอน — แตะหัวข้อด้านล่างเพื่อเริ่ม":
+    done===TOTAL?"✅ เสร็จสิ้นทุกขั้นตอน — พร้อมผลิต!":
+    `ทำแล้ว ${done} จาก ${TOTAL} ขั้นตอน`;
+}
+
+function resetAll(){
+  if(!confirm("ต้องการรีเซ็ตความคืบหน้าทั้งหมดหรือไม่?")) return;
+  Object.keys(checked).forEach(k=>delete checked[k]);
+  STEPS.forEach(step=>renderSubs(step));
+  updateProgress();saveState();
+}
+
+function openLB(key){
+  document.getElementById("lbImg").src=STEP_IMAGES[key];
+  document.getElementById("lbCap").textContent=`ขั้นตอน ${key}`;
+  document.getElementById("lb").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeLB(){
+  document.getElementById("lb").classList.remove("open");
+  document.body.style.overflow="";
+}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLB();});
+
+function saveState(){try{localStorage.setItem("wi_past_v3",JSON.stringify(checked));}catch(e){}}
+function loadState(){try{const s=localStorage.getItem("wi_past_v3");if(s)Object.assign(checked,JSON.parse(s));}catch(e){}}
+
+loadState();renderAll();updateProgress();
+</script>
+</body>
+</html>
